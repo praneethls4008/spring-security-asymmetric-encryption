@@ -1,0 +1,29 @@
+server:
+  port: 8001
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springsecurity_assymetric_jwt_1
+    username: postgres
+    password: ${MYSQL_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # Options: none, update, create, create-drop
+    show-sql: true # Set to false in production environments
+    properties:
+      hibernate:
+        format_sql: true # Set to false in production environments
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+
+# JWT
+application:
+  security:
+    jwt:
+      access-token:
+        secret: Z3R5Y3ZSeWZubHh4ZlU0Y0VIM2Rxd3Z5aWdzY2F2a0lmRmxkUllpQk5MZjZxYQ==
+        expiration: 300000 #4 MINS
+      refresh-token:
+        secret: B3R5D3VSeWZubGh4ZlU0Y0VIM2RxD3W5aWdJY2F2a0lmMmxTUllzQk5MZjZxYQ==
+        expiration: 800000 #10 MINS
