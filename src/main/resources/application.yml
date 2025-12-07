@@ -27,3 +27,4 @@ application:
       refresh-token:
         secret: B3R5D3VSeWZubGh4ZlU0Y0VIM2RxD3W5aWdJY2F2a0lmMmxTUllzQk5MZjZxYQ==
         expiration: 800000 #10 MINS
+    disposable-email: 10minutemail,20minutemail,33mail,5ymail,anonbox,querrillamail

@@ -15,9 +15,17 @@ public class BusinessException extends RuntimeException{
     }
 
     private static String getFormatterMessage(final ErrorCode errorCode, final Object[] args){
-        if(args != null && args.length > 0){
-            return String.format(errorCode.getDefaultMessage(), args);
+        final String message = errorCode.getDefaultMessage();
+
+        if (args != null && args.length > 0 && message.contains("%")) {
+            try {
+                return String.format(message, args);
+            } catch (Exception e) {
+                // Fallback if formatting fails
+                return message;
+            }
         }
-        return errorCode.getDefaultMessage();
+        return message;
+
     }
 }

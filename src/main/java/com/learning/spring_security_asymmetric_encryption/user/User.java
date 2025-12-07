@@ -3,6 +3,8 @@ package com.learning.spring_security_asymmetric_encryption.user;
 import com.learning.spring_security_asymmetric_encryption.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,8 +13,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
@@ -21,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "USER")
+@Table(name = "_USER")
 public class User implements UserDetails {
 
     @Id
@@ -55,12 +56,17 @@ public class User implements UserDetails {
     @Column(name = "IS_EMAIL_VERIFIED")
     private boolean emailVerified;
 
-    @Column(name = "IS_CREDENTIALS_EXPIRED")
-    private boolean expired;
+    @Column(name = "IS_PHONE_VERIFIED")
+    private boolean phoneVerified;
 
+    @Column(name = "IS_CREDENTIALS_EXPIRED")
+    private boolean credentialsExpired;
+
+    @CreatedDate
     @Column(name = "CREATED_DATE", updatable = false, nullable = false)
     private LocalDateTime createdDate;
 
+    @LastModifiedDate
     @Column(name = "LAST_MODIFIED_DATE", insertable = false)
     private LocalDateTime lastModifiedDate;
 
@@ -107,6 +113,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !this.expired;
+        return !this.credentialsExpired;
     }
+
 }
